@@ -1,0 +1,35 @@
+﻿.home-title_background {
+    background-image: url(https://cdn-s3.si.com/s3fs-public/videos/2157889318001_4573559437001_JordanNBA-Logo.jpg);
+    height: 600px;
+}
+
+.home-title_container {
+    text-align: center;
+}
+
+.home-title_font {
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.lead {
+    font-style: italic;
+}
+
+.home-img_container {
+    padding: 20px 0 40px 0;
+}
+
+.home-img {
+    width: 100%;
+}
+
+table.dataTable.select tbody tr,
+table.dataTable thead th:first-child {
+    cursor: pointer;
+}
+
+.selected {
+    background-color: rgba(125, 147, 232, 0.15);
+}
+

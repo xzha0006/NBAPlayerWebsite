@@ -1,0 +1,250 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row home-title_background">
+    <div style="margin-left:92%; margin-top: 5px;" class="row">
+        <div>
+            <a href="https://twitter.com/intent/tweet?&ref_src=twsrc%5Etfw"
+               class="twitter-hashtag-button" data-size="large" data-text="Find all about NBA here!"
+               data-hashtags="NBAPlayers, NBA">Tweet</a>
+        </div>
+        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large" data-mobile-iframe="true">
+            <a class="fb-xfbml-parse-ignore" target="_blank"
+               href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">
+                Share
+            </a>
+        </div>
+    </div>
+    <br /><br /><br /><br />
+    <div class="home-title_container row">
+        <h1 class="home-title_font">NBA Players</h1>
+        <p class="lead">always bring you the latest news of NBA teams and players</p>
+        <br /><br />
+        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Register or Login &raquo;</a></p>
+        
+    </div>
+</div>
+<div class="row">
+    <div class="home-img_container">        
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+                <li data-target="#myCarousel" data-slide-to="4"></li>
+                <li data-target="#myCarousel" data-slide-to="5"></li>
+                <li data-target="#myCarousel" data-slide-to="6"></li>
+                <li data-target="#myCarousel" data-slide-to="7"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="http://www.cheatsheet.com/wp-content/uploads/2016/04/Kobe-Bryant_Christian-Petersen_Getty-Images.jpg" alt="image1" style="width:70%; margin-left:15.5%;" />
+                </div>
+                <div class="item">
+                    <img src="https://s.ndtvimg.com/images/content/2014/dec/806/lebron-james-0.jpg" alt="image2" style="width:70%; margin-left:15.5%;" />
+                </div>
+                <div class="item">
+                    <img src="http://cdn-mf0.heartyhosting.com/sites/mensfitness.com/files/styles/gallery_details_image/public/_main_lebron_1.jpg?itok=LhWbpmMr" alt="image3" style="width:70%; margin-left:15.5%;" />
+                </div>
+                <div class="item">
+                    <img src="https://lasentinel.net/wp-content/uploads/sites/5/2017/04/stephan-curry_1-1.jpg" alt="image4" style="width:70%; margin-left:15.5%;" />
+                </div>
+                <div class="item">
+                    <img src="http://www.cheatsheet.com/wp-content/uploads/2016/06/Draymond-Green_Ezra-Shaw_Getty-Images-2.jpg" alt="image5" style="width:70%; margin-left:15.5%;" />
+                </div>
+                <div class="item">
+                    <img src="http://www.cheatsheet.com/wp-content/uploads/2016/05/Kyle-Lowry-Vaughn-Ridley-Getty-Images.jpg" alt="image6" style="width:70%; margin-left:15.5%;" />
+                </div>
+                <div class="item">
+                    <img src="http://img.wennermedia.com/article-leads-horizontal/yao-ming-nba-hall-of-fame-cc3a03c5-3d8c-40b8-8451-6120311c0bb7.jpg" alt="image7" style="width:70%; margin-left:15.5%;" />
+                </div>
+                <div class="item">
+                    <img src="https://cdn.nba.net/nba-drupal-prod/styles/landscape/s3/2017-03/kawhi%20dunks%20on%20vonleh_0.jpg?itok=_ZiHBSqH" alt="image8" style="width:70%; margin-left:15.5%;" />
+                </div>
+            </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row home-game_container">
+    <h4 class="home-game_title">Guess A Player Or Team Name!</h4>
+    <div id="home-game_button">
+        <button onclick="unhideGame()" class="btn btn-primary home-game_button">start</button>
+    </div>
+    <div ng-app="GuessPlayerOrTeamNameApp" ng-controller="GuessGameController" id="home-game_all" hidden>
+        <br />
+        <input class="dial" data-width="200" data-min="0" data-displayprevious="false" value={{maxIncorrectGuess}}
+         data-fgColor="#00BCD4" data-skin="tron" data-thickness=".4" data-displayPrevious=false ng-model="maxIncorrectGuess" disabled>
+        <div class="home-game_display_name">{{displayName}}</div>
+        <div class="home-game_correct_container">
+            <img src="http://mediad.publicbroadcasting.net/p/kwmu/files/styles/medium/public/201509/smikle.png" alt="Correct Letters: " class="home-game_face" />
+            <br />
+            <span ng-repeat="correctLetter in correctGuessLetters"> {{correctLetter}}</span>
+        </div>
+        <div class="home-game_incorrect_container">
+            <img src="http://al-taiclub.com/images/background-sad-clipart-1.png" alt="Incorrect Letters: " class="home-game_face" />
+            <br />
+            <span ng-repeat="incorrectLetter in incorrectGuessLetters"> {{incorrectLetter}}</span>
+        </div>
+        <br /><br /><br /><br />
+        <input type="text" name="guessLetter" ng-model="userInput.letter" ng-minlength="1" ng-maxlength="1" ng-pattern="/^[A-Za-z]+$/" class="home-game_guess_letter" />
+        <br /><br />
+        <button class="btn btn-info" ng-click="guessLetter()">SUBMIT</button>
+    </div>
+</div>
+<script>
+    function unhideGame() {
+        $('#home-game_all').prop('hidden', false);
+        $('#home-game_button').prop('hidden', true);
+    }
+
+    function hideGame() {
+        $('#home-game_all').prop('hidden', true);
+        $('#home-game_button').prop('hidden', false);
+    }
+
+    var GuessGameApp = angular.module("GuessPlayerOrTeamNameApp", []);
+    GuessGameApp.controller("GuessGameController", ['$scope', '$timeout', function ($scope, $timeout) {
+
+        var nameList = ["Jordan", "James", "Kobe", "Yaoming", "Curry", "Lakers", "Rockets", "Cavaliers", "Warriors", "Celtics"];
+        var selectedName = "";
+        $scope.incorrectGuessLetters = [];
+        $scope.correctGuessLetters = [];
+        $scope.maxIncorrectGuess = 5;
+        $scope.displayName = "";
+        $scope.userInput = {
+            letter: ""
+        };
+
+        var startGame = function () {
+            selectedName = nameList[Math.round(Math.random() * nameList.length)].toUpperCase();
+            $scope.incorrectGuessLetters = [];
+            $scope.correctGuessLetters = [];
+            $scope.maxIncorrectGuess = 5;
+            $scope.displayName = "*".repeat(selectedName.length);
+            console.log("displayName: " + $scope.displayName);
+        }
+
+        $scope.guessLetter = function () {
+            console.log("Guesses left: " + $scope.maxIncorrectGuess);
+            // Previous selected letter
+            var guessLetterUpper = $scope.userInput.letter.toUpperCase();
+            if ($scope.correctGuessLetters.indexOf(guessLetterUpper) != -1 || $scope.incorrectGuessLetters.indexOf(guessLetterUpper) != -1) {
+                $scope.userInput.letter = "";
+                alert("You have tried this letter before!");
+                return;
+            }
+
+            var isGuessCorrect = false;
+            console.log("guess letter: " + guessLetterUpper);
+            console.log(selectedName.indexOf(guessLetterUpper) != -1);
+
+            var i = selectedName.indexOf(guessLetterUpper);
+            while (i != -1) {
+                console.log("i: " + i);
+
+                $scope.displayName = $scope.displayName.slice(0, i) + guessLetterUpper + $scope.displayName.slice(i + 1);
+                i = selectedName.indexOf(guessLetterUpper, i + 1);
+
+                isGuessCorrect = true;
+                console.log("isGuessCorrect" + isGuessCorrect);
+                console.log("display name: " + $scope.displayName);
+            }
+
+            if (isGuessCorrect) {
+                $scope.correctGuessLetters.push(guessLetterUpper);
+                console.log($scope.correctGuessLetters);
+            } else {
+                $scope.incorrectGuessLetters.push(guessLetterUpper);
+                console.log($scope.incorrectGuessLetters);
+                $scope.maxIncorrectGuess--;
+            }
+
+            $timeout(function () {
+                $('.dial').trigger('change');
+            }, 300);
+
+            $scope.userInput.letter = "";
+            if ($scope.maxIncorrectGuess == 0) {
+                // Game over
+                alert("Game over! You lose. The correct name is '" + selectedName + "'.");
+                startGame();
+                hideGame();
+                $('.dial').trigger('change');
+            }
+            if ($scope.displayName.indexOf("*") == -1) {
+                // You win
+                alert("You win! Congrats!");
+                startGame();
+                hideGame();
+                $('.dial').trigger('change');
+            }
+        }
+        startGame();
+    }]);
+
+    $(function () {
+        $(".dial").knob({
+            'min': 0,
+            'max': 5
+        }).trigger('change');
+    });
+</script>
+<style>
+    .home-game_container {
+        margin-top: -20px;
+        text-align: center;
+        background-color: rgba(125, 147, 232, 0.15);
+        height: 570px;
+    }
+    .home-game_title {
+        font-family: 'Nosifer', cursive;
+        padding-top: 3%;
+        font-size: 30px;
+    }
+
+    .home-game_button {
+        margin-top: 10%;
+        border-radius: 50%;
+        width: 170px;
+        height: 170px;
+        font-weight: bold;
+        font-size: 40px;
+        border: none;
+        outline: none !important;
+    }
+    .home-game_correct_container {
+        margin-top: -80px;
+        padding-left: 10%;
+        float: left;
+    }
+    .home-game_incorrect_container {
+        margin-top: -80px;
+        padding-right: 10%;
+        float: right;
+    }
+    .home-game_face {
+        width: 100px;
+    }
+    .home-game_display_name {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .home-game_guess_letter {
+        width: 60px;
+        height: 60px;
+        font-size: 50px;
+    }
+</style>

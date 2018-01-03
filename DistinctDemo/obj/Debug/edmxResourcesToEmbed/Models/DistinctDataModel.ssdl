@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DistinctDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="PlayerId" />
+    </Key>
+    <Property Name="PlayerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="TeamBelonged" Type="int" />
+    <Property Name="Age" Type="int" />
+    <Property Name="Weight" Type="int" />
+    <Property Name="Height" Type="varchar" MaxLength="10" />
+    <Property Name="JerseyNumber" Type="int" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="TeamId" />
+    </Key>
+    <Property Name="TeamId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeamName" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="FoundedYear" Type="int" />
+    <Property Name="LogoImg" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Player_Team">
+    <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
+    <End Role="Player" Type="Self.Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="TeamId" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="TeamBelonged" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DistinctDatabaseModelStoreContainer">
+    <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Player_Team" Association="Self.FK_Player_Team">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Player" EntitySet="Player" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

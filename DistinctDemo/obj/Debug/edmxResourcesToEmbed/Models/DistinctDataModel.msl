@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DistinctDatabaseModelStoreContainer" CdmEntityContainer="DistinctDatabaseEntities1">
+    <EntitySetMapping Name="Players">
+      <EntityTypeMapping TypeName="DistinctDatabaseModel.Player">
+        <MappingFragment StoreEntitySet="Player">
+          <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="TeamBelonged" ColumnName="TeamBelonged" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="JerseyNumber" ColumnName="JerseyNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="DistinctDatabaseModel.Team">
+        <MappingFragment StoreEntitySet="Team">
+          <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="FoundedYear" ColumnName="FoundedYear" />
+          <ScalarProperty Name="LogoImg" ColumnName="LogoImg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

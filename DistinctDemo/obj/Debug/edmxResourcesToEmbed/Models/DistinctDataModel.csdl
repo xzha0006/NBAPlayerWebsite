@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DistinctDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="PlayerId" />
+    </Key>
+    <Property Name="PlayerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TeamBelonged" Type="Int32" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Weight" Type="Int32" />
+    <Property Name="Height" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="JerseyNumber" Type="Int32" />
+    <NavigationProperty Name="Team" Relationship="Self.FK_Player_Team" FromRole="Player" ToRole="Team" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="TeamId" />
+    </Key>
+    <Property Name="TeamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FoundedYear" Type="Int32" />
+    <Property Name="LogoImg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Players" Relationship="Self.FK_Player_Team" FromRole="Team" ToRole="Player" />
+  </EntityType>
+  <Association Name="FK_Player_Team">
+    <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
+    <End Role="Player" Type="Self.Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="TeamId" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="TeamBelonged" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DistinctDatabaseEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Players" EntityType="Self.Player" />
+    <EntitySet Name="Teams" EntityType="Self.Team" />
+    <AssociationSet Name="FK_Player_Team" Association="Self.FK_Player_Team">
+      <End Role="Team" EntitySet="Teams" />
+      <End Role="Player" EntitySet="Players" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<DistinctDemo.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User List</h2>
+
+<p>
+    <button class="btn btn-primary" id="send_email_btn">Send Email</button>
+</p>
+
+<table class="table table-bordered" id="userTable">
+    <thead>
+        <tr>
+            <th>
+                <input name="select_all" value="1" type="checkbox">
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>Logo</th>
+        </tr>
+    </thead>
+    <tfoot style="display:table-header-group">
+        <tr>
+            <td>Logo</td>
+            <td>fName</td>
+            <td>lName</td>
+            
+            <td>age</td>
+            
+            <td>Actions</td>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td></td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    #@Html.DisplayFor(modelItem => item.Age)
+                </td>
+               
+                <td>
+                    <img src="@Url.Content("~/Uploads/" + item.PortraitPath)" alt="Logo.jpg" />
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+    @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

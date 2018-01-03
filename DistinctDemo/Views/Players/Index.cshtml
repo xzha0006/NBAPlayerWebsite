@@ -1,0 +1,153 @@
+﻿@model IEnumerable<DistinctDemo.Models.Player>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Players</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table table-striped table-bordered" id="data">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JerseyNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team.TeamName)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tfoot style="display:table-header-group">
+        <tr>
+            <td>fName</td>
+            <td>lName</td>
+            <td>number</td>
+            <td>age</td>
+            <td>height</td>
+            <td>weight</td>
+            <td>team</td>
+            <td>Actions</td>
+        </tr>
+    </tfoot>
+    <tbody id="tableData">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    #@Html.DisplayFor(modelItem => item.JerseyNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Height) m
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight) lbs
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Team.TeamName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PlayerId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.PlayerId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PlayerId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div id="player-chart">Hello</div>
+<script>
+    var data = [];
+    var ageList = ['age'];
+    var heightList = ['height'];
+    var weightList = ['weight'];
+
+    var rows = document.getElementsByTagName("table")[0].rows;
+    for (var i = 1; i < rows.length - 1; i++) {
+        var age = parseInt(rows[i].cells[3].innerHTML);
+        var height = parseFloat(String(rows[i].cells[4].innerHTML).split(" m")[0]);
+        var weight = parseInt(String(rows[i].cells[5].innerHTML).split(" lbs")[0]);
+        ageList.push(age);
+        heightList.push(height);
+        weightList.push(weight);
+    }
+
+    data.push(ageList);
+    data.push(heightList);
+    data.push(weightList);
+
+    var chart = c3.generate({
+        bindto: '#player-chart',
+        data: {
+            columns: [],
+            axes: {
+                height: 'y2'
+            },
+            types: {
+                weight: 'bar'
+            }
+        },
+        axis: {
+            y: {
+                label: {
+                    text: 'Age',
+                    position: 'outer-middle'
+                }
+            },
+            y2: {
+                show: true,
+                label: {
+                    text: 'Height',
+                    position: 'outer-middle'
+                }
+            }
+        }
+    });
+
+    var index = 0;
+    var nameList = ['age', 'height', 'weight'];
+
+    setInterval(function () {
+        if (index % 6 < 3) {
+            chart.load({
+                columns: [
+                    data[index % 3]
+                ],
+            });
+        } else {
+            chart.unload({
+                ids: [nameList[index % 3]]
+            });
+        }
+        index++;
+    }, 3000);
+
+</script>
